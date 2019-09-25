@@ -1,0 +1,31 @@
+---
+
+rabbitmq_daemon: rabbitmq-server
+rabbitmq_state: started
+rabbitmq_enabled: true
+
+rabbitmq_version: "3.6.16"
+rabbitmq_rpm: "rabbitmq-server-{{ rabbitmq_version }}-1.el{{ ansible_distribution_major_version }}.noarch.rpm"
+rabbitmq_rpm_url: "https://packagecloud.io/rabbitmq/rabbitmq-server/packages/el/{{ ansible_distribution_major_version }}/{{ rabbitmq_rpm }}/download"
+
+update_hosts: true
+
+rabbitmq_hosts: |
+   192.168.0.1 node-1
+   192.168.0.2 node-2
+
+rabbitmq_create_cluster: yes
+rabbitmq_erlang_cookie: WKRBTTEQRYPTQOPUKSVF
+rabbitmq_use_longname: 'false'
+rabbitmq_logrotate_period: weekly
+rabbitmq_logrotate_amount: 20
+rabbitmq_ulimit_open_files: 4096
+rabbitmq_amqp_port: 5672
+rabbitmq_node_port: 25672
+rabbitmq_plugins:
+  - rabbitmq_management
+  - rabbitmq_management_agent
+  - rabbitmq_shovel
+  - rabbitmq_shovel_management
+
+backup_queues_in_two_nodes: false
