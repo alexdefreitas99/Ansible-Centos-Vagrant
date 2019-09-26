@@ -31,7 +31,9 @@ Vagrant.configure(2) do |config|
             node.vm.network "public_network", ip: machine[:ip], bridge: "wlp3s0"
 
             node.vm.provision "shell", inline: <<-SHELL
-              sudo timedatectl set-timezone America/Sao_Paulo
+              sudo su 
+              sed -i 's/^#PasswordAuthentication yes/PasswordAuthentication yes/' /etc/ssh/sshd_config
+              timedatectl set-timezone America/Sao_Paulo
             SHELL
             node.vm.provider "virtualbox" do |vb|
                 vb.customize ["modifyvm", :id, "--memory", RAM]
