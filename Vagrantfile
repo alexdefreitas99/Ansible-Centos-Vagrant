@@ -1,24 +1,20 @@
 BRIDGE_NET="192.168.0."
 DOMAIN="tst"
 RAM = 512
-ANSIBLESH ="https://gist.githubusercontent.com/alexdefreitas99/2789e981fd8173cb353a563bc3f6ece1/raw/dbbbb67a2e0468f2d990289d9ffd74d393d123a9/ansible.sh";
 
 servers=[
   {
     :hostname => "rabbitmq1." + DOMAIN,
-    :ip => BRIDGE_NET + "2",
-    :ip_int => "1",
+    :ip => BRIDGE_NET + "2"
   },
   {
 
     :hostname => "rabbitmq2." + DOMAIN,
-    :ip => BRIDGE_NET + "3",
-    :ip_int => "2"
+    :ip => BRIDGE_NET + "3"
   },
   {
     :hostname => "rabbitmq3." + DOMAIN,
-    :ip => BRIDGE_NET + "4",
-    :ip_int => "3"
+    :ip => BRIDGE_NET + "4"
   }
 ]
 
