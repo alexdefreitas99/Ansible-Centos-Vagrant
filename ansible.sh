@@ -1,4 +1,4 @@
-if ! grep -Fq "^ansible" /etc/passwd
+if ! grep -Fq "ansible" /etc/passwd
   then
     echo "Adding ansible user"
     useradd -rmU -G wheel -s /bin/bash ansible
