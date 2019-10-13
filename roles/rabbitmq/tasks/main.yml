@@ -5,12 +5,23 @@
     name: wget
     state: present
 
-- name: Install erlang
-  shell: "curl -s https://packagecloud.io/install/repositories/rabbitmq/erlang/script.rpm.sh | sudo bash"
+- name: Add rabbitmq repository
+  shell: "curl -s https://packagecloud.io/install/repositories/rabbitmq/rabbitmq-server/script.rpm.sh | sudo bash"
   args:
     executable: /bin/bash
 
 - name: Install rabbitmq
-  shell: "curl -s https://packagecloud.io/install/repositories/rabbitmq/rabbitmq-server/script.rpm.sh | sudo bash"
-  args:
-    executable: /bin/bash
+  yum: 
+    name: rabbitmq-server
+    state: present
+
+- name: Initialize rabbitmq-server
+  systemd: 
+    name: rabbitmq-server
+    state: started
+    enabled: yes
+
+- name: Enables the rabbitmq_management plugin
+  rabbitmq_plugin:
+    names: rabbitmq_management
+    state: enabled
