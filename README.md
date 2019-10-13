@@ -7,4 +7,4 @@ $ vagrant up
 $ ansible-playbook rabbitmq.yml -i roles/rabbitmq/inventories/hosts
 
 # Install rabbitmq in all vm's
-$ ansible-playbook rabbitmq.yml
+$ ansible-playbook rabbitmq.yml -i roles/rabbitmq/inventories/hosts
