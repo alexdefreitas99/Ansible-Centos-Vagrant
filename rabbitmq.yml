@@ -1,0 +1,8 @@
+---
+
+- hosts: 
+    - rabbitmq_master
+    - rabbitmq_workers
+  roles:
+  - role: basic-setup
+  # - role: rabbitmq
