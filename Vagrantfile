@@ -1,6 +1,7 @@
 BRIDGE_NET="192.168.0."
 DOMAIN="tst"
 RAM = 512
+ANSIBLESH ="https://gist.githubusercontent.com/alexdefreitas99/2789e981fd8173cb353a563bc3f6ece1/raw/dbbbb67a2e0468f2d990289d9ffd74d393d123a9/ansible.sh";
 
 servers=[
   {
@@ -21,7 +22,6 @@ servers=[
   }
 ]
 
-
 Vagrant.configure(2) do |config|
     config.vm.synced_folder ".", "/vagrant", disabled: true
     servers.each do |machine|
@@ -29,14 +29,13 @@ Vagrant.configure(2) do |config|
             node.vm.box = "centos/7"
             node.vm.hostname = machine[:hostname]
             node.vm.network "public_network", ip: machine[:ip], bridge: "wlp3s0"
-
-            node.vm.provision "shell", inline: <<-SHELL
-              sudo su 
-              sed -i 's/^#PasswordAuthentication yes/PasswordAuthentication yes/' /etc/ssh/sshd_config
-              timedatectl set-timezone America/Sao_Paulo
-            SHELL
+            node.vm.provision "shell", 
+              inline: <<-SHELL
+                curl ANSIBLESH | bash
+                timedatectl set-timezone America/Sao_Paulo
+              SHELL
             node.vm.provider "virtualbox" do |vb|
-                vb.customize ["modifyvm", :id, "--memory", RAM]
+                vb.memory = RAM
                 vb.name = machine[:hostname]
             end
         end
