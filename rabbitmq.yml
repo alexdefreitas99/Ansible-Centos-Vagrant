@@ -1,7 +1,6 @@
 ---
 
 - hosts: 
-    - rabbitmq_master
-    - rabbitmq_workers
+    - rabbitmq_hosts
   roles:
   - role: rabbitmq
