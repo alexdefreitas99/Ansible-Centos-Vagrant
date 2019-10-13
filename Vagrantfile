@@ -29,11 +29,7 @@ Vagrant.configure(2) do |config|
             node.vm.box = "centos/7"
             node.vm.hostname = machine[:hostname]
             node.vm.network "public_network", ip: machine[:ip], bridge: "wlp3s0"
-            node.vm.provision "shell", 
-              inline: <<-SHELL
-                curl ANSIBLESH | bash
-                timedatectl set-timezone America/Sao_Paulo
-              SHELL
+            node.vm.provision "shell", path:"ansible.sh"
             node.vm.provider "virtualbox" do |vb|
                 vb.memory = RAM
                 vb.name = machine[:hostname]
