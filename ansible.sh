@@ -10,4 +10,4 @@ if ! grep -Fq "ansible" /etc/passwd
 fi
 echo "Initializing full system update"
 timedatectl set-timezone America/Sao_Paulo
-apt upgrade -y && apt update -y
+yum upgrade -y && yum update -y
