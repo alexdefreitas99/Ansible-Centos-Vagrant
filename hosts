@@ -1,8 +1,0 @@
-[rabbitmq_hosts]
-192.168.0.2
-192.168.0.3
-
-[all:vars]
-ansible_connection=ssh
-ansible_ssh_user=vagrant
-ansible_ssh_pass=vagrant
