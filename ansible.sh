@@ -8,6 +8,4 @@ if ! grep -Fq "ansible" /etc/passwd
     chown -R ansible. /home/ansible/.ssh
     echo ansible ALL=NOPASSWD:ALL > /etc/sudoers.d/ansible
 fi
-echo "Initializing full system update"
 timedatectl set-timezone America/Sao_Paulo
-yum upgrade -y && yum update -y
