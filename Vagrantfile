@@ -1,6 +1,6 @@
-BRIDGE_NET="192.168.0."
+BRIDGE_NET="192.168.1."
 DOMAIN="tst"
-RAM = 512
+RAM = 1024
 
 servers=[
   {
