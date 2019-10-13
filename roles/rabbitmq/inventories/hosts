@@ -2,13 +2,11 @@
 192.168.0.2
 192.168.0.3
 
-
 [rabbitmq_master]
 master ansible_host=192.168.0.2
 
 [rabbitmq_workers]
 worker1 ansible_host=192.168.0.3
-
 
 [all:vars]
 ansible_become=yes
