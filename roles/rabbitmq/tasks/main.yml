@@ -1,42 +1,29 @@
 ---
 
-- name: Install wget
-  yum: 
-    name: wget
-    state: present
-
-# - name: Add rabbitmq repository
-#   shell: "curl -s https://packagecloud.io/install/repositories/rabbitmq/rabbitmq-server/script.rpm.sh | sudo bash"
-#   args:
-#     executable: /bin/bash
+- name: Add rabbitmq repository
+  shell: "curl -s https://packagecloud.io/install/repositories/rabbitmq/rabbitmq-server/script.rpm.sh | sudo bash"
+  args:
+    executable: /bin/bash
 
 - name: Install rabbitmq
   yum: 
     name: rabbitmq-server
     state: present
 
-# - name: Enable web management login from outside localhost
-#   shell: "echo [{rabbit, [{loopback_users, []}]}]. > /etc/rabbitmq/rabbitmq.config"
-#   args:
-#     executable: /bin/bash
+- name: Stop rabbitmq-server
+  systemd: 
+    name: rabbitmq-server
+    state: stoped
 
-- name: Initialize and enable rabbitmq-server
+- include_tasks: web_management.yml
+
+- include_tasks: config_cluster.yml
+
+- include_tasks: enable_ha.yml
+
+- name: Enable rabbitmq-server
   systemd: 
     name: rabbitmq-server
     state: started
     enabled: yes
 
-- name: Enables the rabbitmq_management plugin
-  rabbitmq_plugin:
-    names: rabbitmq_management
-    state: enabled
-    
-- rabbitmq_user:
-    user: alex
-    password: alex
-    vhost: /
-    configure_priv: .*
-    read_priv: .*
-    write_priv: .*
-    state: present
-    tags: administrator

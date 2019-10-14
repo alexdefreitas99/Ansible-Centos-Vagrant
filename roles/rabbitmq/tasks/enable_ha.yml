@@ -1,0 +1,16 @@
+---
+
+- name: Set HA policy to master cluster
+  shell: rabbitmqctl set_policy ha-all ".*" '{"ha-mode":"all", "ha-sync-mode":"automatic"}'
+  args:
+    executable: /bin/bash
+  when: inventory_hostname == "master"
+
+# MODULE IN EXPERIMENT DON'T use for production ambient
+# - name: Ensure the default vhost contains the HA policy
+#   rabbitmq_policy:
+#     name: HA
+#     pattern: .*
+#     tags:
+#       ha-mode: all
+#   when: inventory_hostname == "master"
