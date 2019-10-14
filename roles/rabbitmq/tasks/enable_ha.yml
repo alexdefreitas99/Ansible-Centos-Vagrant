@@ -4,10 +4,8 @@
   shell: rabbitmqctl set_policy ha-all ".*" '{"ha-mode":"all", "ha-sync-mode":"automatic"}'
   args:
     executable: /bin/bash
-  notify: restart rabbitmq-server
   when: inventory_hostname == "master"
 
-- meta: flush_handlers
 # MODULE IN EXPERIMENT DON'T use for production ambient
 # - name: Ensure the default vhost contains the HA policy
 #   rabbitmq_policy:

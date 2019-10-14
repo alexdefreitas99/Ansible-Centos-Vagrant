@@ -1,10 +1,4 @@
 ---
-
-- name: start rabbitmq-server
-  systemd: 
-    name: rabbitmq-server
-    state: started
-
 - name: Change rabbitmq erlang cookie
   template:
     src: erlang.cookie.j2
