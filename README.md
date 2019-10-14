@@ -32,3 +32,8 @@ https://www.rabbitmq.com/ha.html
 https://www.rabbitmq.com/parameters.html
 
 https://www.cloudamqp.com/blog/2018-01-09-part3-rabbitmq-best-practice-for-high-availability.html
+
+
+# License
+
+This project is licensed under the WTFPL License - see the LICENSE.md file for details
