@@ -1,5 +1,22 @@
 ---
-- name: Change rabbitmq erlang cookie
+
+- name: backup old erlang cookie
+  shell: cp -a /var/lib/rabbitmq/.erlang.cookie /var/lib/rabbitmq/.erlang.cookie.old
+  changed_when: false
+
+- name: Check if erlang cookie changed and if it's so stopping server
+  template:
+    src: erlang.cookie.j2
+    dest: /var/lib/rabbitmq/.erlang.cookie.old
+    owner: rabbitmq
+    group: rabbitmq
+    mode: 0400
+  notify:
+    stop rabbitmq-server
+
+- meta: flush_handlers
+
+- name: Updating rabbitmq erlang cookie
   template:
     src: erlang.cookie.j2
     dest: /var/lib/rabbitmq/.erlang.cookie
@@ -7,12 +24,8 @@
     group: rabbitmq
     mode: 0400
 
-- name: stop rabbitmq app
-  command: rabbitmqctl stop_app
-
-- name: add this node to cluster
-  command: rabbitmqctl join_cluster rabbit@192.168.1.2
-  when: inventory_hostname != "master"
-
-- name: start rabbitmq app
-  command: rabbitmqctl start_app
+- name: remove old erlang cookie
+  file:
+    path: /var/lib/rabbitmq/.erlang.cookie.old
+    state: absent
+  changed_when: false

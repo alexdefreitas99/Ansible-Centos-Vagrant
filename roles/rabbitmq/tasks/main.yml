@@ -1,5 +1,7 @@
 ---
 
+rabbitmq_cluster_master: 192.168.0.2
+
 # TODO: Change to get_url
 - name: Add erlang repository
   shell: "curl -s https://packagecloud.io/install/repositories/rabbitmq/erlang/script.rpm.sh | sudo bash"
@@ -17,17 +19,18 @@
     name: rabbitmq-server
     state: present
 
-- name: Start and enable rabbitmq-server
-  systemd: 
-    name: rabbitmq-server
-    state: started
-    daemon_reload: yes
-
-- name: make sure rabbitmq app is up
-  command: rabbitmqctl start_app
-
 - include_tasks: config_cluster.yml
+
+- name: Start and enable rabbitmq-server
+  service:
+    name: rabbitmq-server
+    enabled: yes
+    state: started
+
+- include_tasks: cluster.yml
 
 - include_tasks: web_management.yml
 
 - include_tasks: enable_ha.yml
+
+- meta: flush_handlers
