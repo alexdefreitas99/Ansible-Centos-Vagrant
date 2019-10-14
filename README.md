@@ -28,8 +28,11 @@ $ ansible-playbook rabbitmq.yml -i roles/rabbitmq/inventories
 ## References
 
 https://www.rabbitmq.com/clustering.html
+
 https://www.rabbitmq.com/ha.html
+
 https://www.rabbitmq.com/parameters.html
+
 
 https://www.cloudamqp.com/blog/2018-01-09-part3-rabbitmq-best-practice-for-high-availability.html
 
