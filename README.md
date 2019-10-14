@@ -1,3 +1,5 @@
+## Using vagrant to create CentOS vm's and ansible to configure them with RabbitMQ HA.
+
 # Project to create a immutable infra that use CentOS and RabbitMQ in cluster HA(high availability) mode.
 
 The rabbitmq structure is based in 3 nodes: 2 slaves and 1 master.
