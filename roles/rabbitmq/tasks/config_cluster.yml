@@ -6,7 +6,6 @@
     state: started
 
 - name: Change rabbitmq erlang cookie
-  shell: echo 2HITDgiIdXFqF1Y9pgVtiw== > 
   template:
     src: erlang.cookie.j2
     dest: /var/lib/rabbitmq/.erlang.cookie

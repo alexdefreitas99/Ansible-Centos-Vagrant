@@ -1,6 +1,6 @@
 ---
 
-- name: Enable and start rabbitmq-server
+- name: Start rabbitmq-server
   systemd: 
     name: rabbitmq-server
     state: started
