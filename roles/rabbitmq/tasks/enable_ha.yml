@@ -5,6 +5,8 @@
   args:
     executable: /bin/bash
 
+- meta: flush_handlers
+
 # MODULE IN EXPERIMENT DON'T use for production ambient
 # - name: Ensure the default vhost contains the HA policy
 #   rabbitmq_policy:

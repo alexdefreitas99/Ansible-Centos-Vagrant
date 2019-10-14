@@ -1,5 +1,10 @@
 ---
 
+- name: Add erlang repository
+  shell: "curl -s https://packagecloud.io/install/repositories/rabbitmq/erlang/script.rpm.sh | sudo bash"
+  args:
+    executable: /bin/bash
+
 - name: Add rabbitmq repository
   shell: "curl -s https://packagecloud.io/install/repositories/rabbitmq/rabbitmq-server/script.rpm.sh | sudo bash"
   args:

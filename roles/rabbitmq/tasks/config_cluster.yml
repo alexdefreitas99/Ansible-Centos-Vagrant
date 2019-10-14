@@ -17,5 +17,3 @@
 - name: add this node to cluster
   command: rabbitmqctl join_cluster rabbit@{{ ansible_hostname }}
   when: inventory_hostname != "master"
-
-- meta: flush_handlers
