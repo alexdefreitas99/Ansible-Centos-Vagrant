@@ -5,13 +5,19 @@ The node master has a HA policy that mirror the queues/exchanges behind all node
 Only durable queues are mirrored.
 
 # Create CentOS vm's
+```
 $ vagrant up 
+```
 
 # Upgrade all vm's RabbitMQ
+```
 $ ansible-playbook basic-setup.yml -i roles/rabbitmq/inventories
+```
 
 # Install RabbitMQ in all vm's
+```
 $ ansible-playbook rabbitmq.yml -i roles/rabbitmq/inventories
+```
 
 
 # References
