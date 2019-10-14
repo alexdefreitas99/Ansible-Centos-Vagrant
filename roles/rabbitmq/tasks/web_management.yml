@@ -1,5 +1,10 @@
 ---
 
+- name: Enable and start rabbitmq-server
+  systemd: 
+    name: rabbitmq-server
+    state: started
+
 - name: Enables the rabbitmq_management plugin
   rabbitmq_plugin:
     names: rabbitmq_management
@@ -14,6 +19,9 @@
     write_priv: .*
     state: present
     tags: administrator
+  notify: restart rabbitmq-server
+
+- meta: flush_handlers
 
 # GAMBI
 # - name: Enable web management login from outside localhost

@@ -1,10 +1,12 @@
 ---
 
+# TODO: Change to get_url
 - name: Add erlang repository
   shell: "curl -s https://packagecloud.io/install/repositories/rabbitmq/erlang/script.rpm.sh | sudo bash"
   args:
     executable: /bin/bash
 
+# TODO: Change to get_url
 - name: Add rabbitmq repository
   shell: "curl -s https://packagecloud.io/install/repositories/rabbitmq/rabbitmq-server/script.rpm.sh | sudo bash"
   args:
@@ -15,21 +17,11 @@
     name: rabbitmq-server
     state: present
 
-- name: Stop rabbitmq-server
-  systemd: 
-    name: rabbitmq-server
-    state: stoped
-
-- include_tasks: web_management.yml
+- name: make sure rabbitmq app is up
+  command: rabbitmqctl start_app
 
 - include_tasks: config_cluster.yml
 
+- include_tasks: web_management.yml
+
 - include_tasks: enable_ha.yml
-  when: inventory_hostname == "master"
-
-- name: Enable rabbitmq-server
-  systemd: 
-    name: rabbitmq-server
-    state: started
-    enabled: yes
-

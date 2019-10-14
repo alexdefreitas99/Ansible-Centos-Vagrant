@@ -1,19 +1,25 @@
 ---
 
-- name: Backup old erlang cookie
-  shell: cp -a /var/lib/rabbitmq/.erlang.cookie /var/lib/rabbitmq/.erlang.cookie.old
-  changed_when: false
+- name: start rabbitmq-server
+  systemd: 
+    name: rabbitmq-server
+    state: started
 
 - name: Change rabbitmq erlang cookie
+  shell: echo 2HITDgiIdXFqF1Y9pgVtiw== > 
   template:
     src: erlang.cookie.j2
     dest: /var/lib/rabbitmq/.erlang.cookie
     owner: rabbitmq
     group: rabbitmq
     mode: 0400
-  notify:
-    stop rabbitmq-server
+
+- name: stop rabbitmq app
+  command: rabbitmqctl stop_app
 
 - name: add this node to cluster
-  command: rabbitmqctl join_cluster rabbit@{{ ansible_hostname }}
+  command: rabbitmqctl join_cluster rabbit@192.168.1.2
   when: inventory_hostname != "master"
+
+- name: start rabbitmq app
+  command: rabbitmqctl start_app
