@@ -1,5 +1,6 @@
 # Using vagrant to create CentOS vm's and ansible to configure them with RabbitMQ HA.
 
+
 ## This is a POC(Proof of Concept) to study the use of Vagrant and Ansible.
 
 The rabbitmq structure is based in 3 nodes: 2 slaves and 1 master.
