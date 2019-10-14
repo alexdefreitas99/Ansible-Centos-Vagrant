@@ -20,6 +20,7 @@
 - include_tasks: config_cluster.yml
 
 - include_tasks: enable_ha.yml
+  when: inventory_hostname == "master"
 
 - name: Enable rabbitmq-server
   systemd: 
