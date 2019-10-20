@@ -5,3 +5,4 @@
     - rabbitmq_workers
   roles:
   - role: rabbitmq
+    rabbitmq_cluster_master: 192.168.0.2

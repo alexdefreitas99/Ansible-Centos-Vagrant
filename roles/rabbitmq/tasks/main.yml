@@ -1,6 +1,6 @@
 ---
 
-rabbitmq_cluster_master: 192.168.0.2
+# rabbitmq_cluster_master: 192.168.0.2
 
 # TODO: Change to get_url
 - name: Add erlang repository
